@@ -1,0 +1,33 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 537, in script
+    with shake
+  File "game/script.rpy", line 537, in <module>
+    with shake
+         ^^^^^
+NameError: name 'shake' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "game/script.rpy", line 537, in script
+    with shake
+  File "renpy/ast.py", line 1574, in execute
+    trans = renpy.python.py_eval(self.expr)
+            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "renpy/python.py", line 1292, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1285, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/script.rpy", line 537, in <module>
+    with shake
+         ^^^^^
+NameError: name 'shake' is not defined
+
+Windows-11-10.0.26100-SP0 AMD64
+Ren'Py 8.4.1.25072401
+Group Five 1.0
+Sat Nov 22 18:01:38 2025
