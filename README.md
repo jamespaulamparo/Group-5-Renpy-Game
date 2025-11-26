@@ -37,7 +37,7 @@ This project is licensed under the **MIT License**.
 ## ⚙️ Installation & Usage
 
 ### Prerequisites
-To run the game, you must have the **Ren'Py SDK** installed.
+To run the game, you must have the **Ren'Py SDK** installed. (a working standalone app is not yet implemented.)
 
 ### How to Run:
 1.  **Clone the Repository**
