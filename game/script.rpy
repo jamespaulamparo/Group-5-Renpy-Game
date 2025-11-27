@@ -1,17 +1,36 @@
 # The script of the game goes in this file.
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
 define a = Character("Andrea", who_color="#d2e2eb", what_color="#FFFFFF")
 define r = Character("Rafaela", who_color="#dacd7f", what_color="#FFFFFF")
 define k = Character("Kira", who_color="#d3ad8b", what_color="#FFFFFF")
 define j = Character("Jamie", who_color="#a15656", what_color="#FFFFFF")
+
 define c = Character("Ms. Cassandra", who_color="#9e8677", what_color="#FFFFFF")
 define l = Character("Loraine", who_color="#a298c6", what_color="#FFFFFF")
 define h = Character("Haifa", who_color="#93c386", what_color="#FFFFFF")
 
-# Custom positions
+# add dan, choco for sub haraters
+# Example: define dan = Character("Dan", color="#...")
+# Example: define choco = Character("Choco", color="#...")
+
+
+# ---------------------------------------
+
+# initilization of variables
+default andrea_rel = 0
+default rafaela_rel = 0
+default kira_rel = 0
+default jamie_rel = 0
+
+default cassie_rel = 0
+default loraine_rel = 0
+default haifa_rel = 0
+
+# Loraine Question Flags
+default kira_asked = False
+default andrea_asked = False
+default rafaela_asked = False
+default jamie_asked = False
 
 # The game starts here.
 
@@ -20,7 +39,7 @@ label start:
     scene bg classroom
     with dissolve 
 
-    show mc happy at left:
+    show mc neutral at left:
         zoom 1.5
     with dissolve
     "......."
@@ -110,7 +129,7 @@ label start:
             jump rudeloraine
 
     label sorryloraine:
-        #have a plus point relation here with loraine
+        $ loraine_rel += 1 # plus point relation here with loraine
         show mc neutral at left
         mc "Yeah I did, sorry."
         l "It's alright."
@@ -136,7 +155,7 @@ label start:
         jump loraine
 
     label rudeloraine:
-        #have a minus relationship point here with loraine
+        $ loraine_rel -= 1 # minus relationship point here with loraine
         show mc angry at left
         mc "None of your business."
 
@@ -220,7 +239,7 @@ label start:
         mc "There we go, I'm group five."
         
         show loraine sweat at right
-        l "Oh, oh sh-good luck."
+        l "Oh, {w}oh sh-good luck."
 
         show mc neutral at left
         mc "What, why?"
@@ -244,7 +263,8 @@ label start:
 
         show mc neutral at left
         mc "Fuck that. Why are they so bad anyway? Like for example..."
-# --- LOCALIZED FLAG INITIALIZATION ---
+        
+        # --- LOCALIZED FLAG INITIALIZATION ---
         $ kira_asked = False
         $ andrea_asked = False
         $ rafaela_asked = False
@@ -253,77 +273,106 @@ label start:
         jump questionLoraine
 
     label questionLoraine:
-    menu: 
-        "Isn't Kira an honor student?" if not kira_asked:
-            jump kiraLoraine
-        
-        "You had fun being Andrea's groupmate before." if not andrea_asked:
-            jump andreaLoraine
+        python:
+            choices = []
 
-        "Rafaela's not that bad right?" if not rafaela_asked:
-            jump rafaelaLoraine
+            if not kira_asked:
+                choices.append(("Isn't Kira an honor student?", "kiraLoraine"))
+            
+            if not andrea_asked:
+                choices.append(("You had fun being Andrea's groupmate before.", "andreaLoraine"))
 
-        "Didn't you owe Jamie something?" if not jamie_asked:
-            jump jamieLoraine
-
-        "I'm done asking.":
-            jump finishLoraine
+            if not rafaela_asked:
+                choices.append(("Rafaela's not that bad right?", "rafaelaLoraine"))
+            
+            if not jamie_asked:
+                choices.append(("Didn't you owe Jamie something?", "jamieLoraine"))
+            
+            if kira_asked and andrea_asked and rafaela_asked and jamie_asked:
+                choices.append(("I'm done asking.", "finishLoraine"))
+            
+            result = renpy.display_menu(choices)
+            
+            if result:
+                renpy.jump(result)
 
     label kiraLoraine:
-        # Set flag to True
         $ kira_asked = True
         
         show mc neutral at left
-        mc "Isn't Kira an honor student?"
+        mc "Isn't Kira an honor student? Like, top of the class, honor student?"
         
-        "*Loraine looks around and pulls me close*"
         show loraine sweat at right
-        l "Shh, she might overhear. {w}Kira's great and all but she has zero chill."
-        l "Last time I was her groupmate, {w}I couldn't tell if she was being sarcastic or not."
+        "*Loraine looks around and pulls me close, nearly knocking over my chair.*"
+        play sound "audio/rustle.mp3"
+        l "Shh, she might overhear. Her ears are probably laser-focused on all nearby slackers, including me."
+        
+        show loraine neutral at right
+        l "Kira's great, yeah, {w}but she has zero chill. Last time I was her groupmate, I couldn't tell if she was being sarcastic or not."
         
         show mc cringe at left
-        mc "Yikes..."
+        mc "Yikes."
+        
+        show loraine sad at right
+        l "Yeah. Good luck having her as your leader if it came down to that."
+        
         jump questionLoraine
 
     label andreaLoraine:
-        # Set flag to True
         $ andrea_asked = True
         
         show mc neutral at left
-        mc "You had fun being Andrea's groupmate before."
+        mc "You had fun being Andrea's groupmate before, right?"
         
         show loraine sweat at right
         l "She's active most of the time but... {w}I think she lags in real life. Like, you'd have to call her name multiple times to even get her attention."
-        l "Look, she's not even present in the class right now. {w}I don't even know how she got her name in the wheel."
+        
+        show loraine sad at right
+        l "Plus, look. She's not even present in the class right now. {w}I don't even know how she got her name in the wheel in the first place."
         
         show mc sad at left
         mc "Oh."
+        
+        show loraine neutral at right
+        l "She'll help, dont worry."
+        
         jump questionLoraine
 
     label rafaelaLoraine:
-        # Set flag to True
         $ rafaela_asked = True
         
         show mc neutral at left
-        mc "Rafaela's not that bad right?"
+        mc "Rafaela's not that bad right? I honestly don't know anything about her."
         
         show loraine neutral at right
-        l "Ehh, she's okay I guess. {w}But to be honest, I don't know her much, I'm pretty sure no one does either."
+        l "Ehh, she's okay I guess."
+        
+        show loraine happy at right
+        l "But to be honest, I don't know her much, {w}I'm pretty sure no one does either. She just exists."
         
         show mc neutral at left
-        mc "Doesn't sound too bad."
+        mc "Doesn't sound too bad. At least she's quiet."
+        
         jump questionLoraine
 
     label jamieLoraine:
-        # Set flag to True
         $ jamie_asked = True
         
         show mc neutral at left
-        mc "Didn't you owe Jamie something? What's that about?"
+        mc "Didn't you owe Jamie something? What's the deal with her being in the group, anyway?"
         
-        show loraine neutral at right
-        l "She helps around when in OTHER classes, but the thing is she's absent almost everyday. I'm pretty sure she dropped this class already."
-        l "She just shows up sometimes for some reason."
+        show loraine sad at right
+        l "Ugh, she's basically a ghost. She helps me out in OTHER classes, but the thing is, she's absent almost everyday from this one."
+        
+        show loraine sweat at right
+        l "I'm pretty sure she dropped this class already, but she just shows up sometimes for some reason. {w}But again, not in this class."
+        
+        show mc cringe at left
+        mc "So, a guaranteed absent member. Great."
+        
+        show loraine sad at right
+        l "Pretty much."
+        
         jump questionLoraine
 
     label finishLoraine:
@@ -374,64 +423,66 @@ label start:
         "..."
         
         hide cassie neutral with dissolve
-        hide loraine neutral with dissolve
         hide mc sad with dissolve
         
         jump hallwayProfessor
 
     label hallwayProfessor:
         scene bg hallway
-    with dissolve 
+        with dissolve 
 
-    show mc neutral at left:
-        zoom 1.5
-    with dissolve
+        show mc neutral at left:
+            zoom 1.5
+        with dissolve
 
-    show cassie neutral at right:
-        zoom 1.5
-    with dissolve
+        show cassie neutral at right:
+            zoom 1.5
+        with dissolve
+        
+        c "...Ms. [lastname]?"
+        c "Hello? [lastname], are you listening?"
 
-    c "...Ms. [lastname]?"
-    c "Hello? [lastname], are you listening?"
+        show mc neutral at left
+        mc "Not really, Ma'am, what was it again?"
+        show cassie dismayed at right
+        "*Professor Cassandra exhales hard*"
 
-    mc "Not really, Ma'am, what was it again?"
-    show cassie dismayed at right
-    "*Professor Cassandra exhales hard*"
+        show mc sad at left
+        mc "(She really wants me dead, huh.)"
 
-    mc "(She really wants me dead, huh.)"
+        show cassie neutral at right
+        c "Look. I’m going to be straight with you."
+        c "If you keep going at this rate, you’re gonna fail my class."
 
-    show cassie neutral at right
-    c "Look. I’m going to be straight with you."
-    c "If you keep going at this rate, you’re gonna fail my class."
+        show mc sad at left
+        mc "(Ah, this kind of talk.)"
+        mc "(I've heard this before, probably word-for-word in a different hallway with a different teacher.)"
+        mc "(Really, let's just get this over with.)"
 
-    show mc sad at left
-    mc "(Ah, this kind of talk.)"
-    mc "(I've heard this before, probably word-for-word in a different hallway with a different teacher.)"
-    mc "(Really, let's just get this over with.)"
+        c "I’ve done the math. You’ve missed three minor activities, flunked more than a couple quizzes, {w}and your midterm was..."
+        "*She lets the silence hang*"
+        show mc happy at left
+        mc "Yay, love to see the consistency."
 
-    c "I’ve done the math. You’ve missed three minor activities, flunked more than a couple quizzes, {w}and your midterm was..."
-    "*She lets the silence hang*"
-    show mc happy at left
-    mc "Yay, love to see the consistency."
+        c "If you don’t pull through on this final project, you’re not passing. You know that, right?"
+        show mc neutral at left
+        mc "Yeah. {w}You’ve mentioned."
+        c "And you don’t even look worried."
 
-    c "If you don’t pull through on this final project, you’re not passing. You know that, right?"
-    show mc neutral at left
-    mc "Yeah. {w}You’ve mentioned."
-    c "And you don’t even look worried."
+        mc "Yeah, yeah. I got it. Sell some product or whatever. Happy now?"
+        show cassie angry at right
+        c "Don’t joke. I’m serious."
+        c "Look. If this were just about the grade, I’d move on. Let you dig your own grave and call it a day."
 
-    mc "Yeah, yeah. I got it. Sell some product or whatever. Happy now?"
-    show cassie angry at right
-    c "Don’t joke. I’m serious."
-    c "Look. If this were just about the grade, I’d move on. Let you dig your own grave and call it a day."
+        menu:
+            "Why are you telling me this?":
+                jump whyProfessor
 
-    menu:
-        "Why are you telling me this?":
-            jump whyProfessor
-
-        "Why do you even care?":
-            jump okProfessor
+            "Why do you even care?":
+                jump okProfessor
 
     label whyProfessor:
+
         show mc neutral at left
         mc "...why are you telling me this?"
         c "Because you're not some lost cause, no matter how much you try to be."
@@ -443,6 +494,7 @@ label start:
         c "I always wait for your submissions because I know they’ll be good. {w}But other than that? you're doing everything in your power to do nothing."
         c "So what is it?"
         c "You lazy? Bored? Or are you just... {w}scared?"
+        show mc cringe at left
         mc "...scared of what? Group projects and capitalism?"
         mc "Both are pretty tricky in my experience."
         c "Capitalism? Where did that even..."
@@ -464,10 +516,6 @@ label start:
         c "Anyway. I’ve got thirty-four other students to deal with. {w}I don’t have time to babysit kids who don't even try."
         c "You want to fail? Be my guest."
 
-        # "I cleared my throat and forced a grin."
-        # $firstname ""...So no free pass then?""
-        # c ""If I gave you one, you’d just waste it too."
-
         c "Go back inside. Try not to be a burden your groupmates. Maybe surprise yourself this time."
 
         "She went back inside the room, leaving me alone in the hallway."
@@ -486,13 +534,13 @@ label start:
                 jump stayHallway
 
             "Leave the damn school.":
-                jump leaveHallway
+                jump leaveShool
 
     label okProfessor:
-        # have a minus relationship point here with cassie
+        $ cassie_rel -= 1 # minus relationship point here with cassie
         show mc angry at left
         mc "Why do you even care? It’s not like I’m your best student or something."
-        mc "And...  {w}aren't you just some student teacher who wants to quit her fuckass job-{nw}"
+        mc "And...  {w}aren't you just some student teacher who wants to quit this... {w}fuckass job-{nw}"
         show cassie dismayed at right
         c "Shut up before you say anything you'll regret."
         c "I will consider it that you misspoke and forget it."
@@ -502,7 +550,7 @@ label start:
 
     label stayHallway:
         hide mc sad
-        play sound "audio/campus_ambiance.mp3" volume 0.2 fadein 1.0 loop
+        stop music fadeout 1.0
 
         "I didn't go back right away."
         "The hallway was quiet, finally. I can finally think."
@@ -518,42 +566,46 @@ label start:
         
         show mc cringe at center
         mc "(Bullshit. Or maybe not. I don't know anymore.)"
-
-        show mc neutral at center
+        jump stayHallway2
+    
+    label stayHallway2:
+        show mc neutral at center:
+            zoom 1.5
+        with dissolve
         "I sighed and looked up at the ceiling. Hoping that it would just collapse on me to save me the trouble."
 
-        play sound "audio/s_footsteps.ogg"
+        play sound "audio/running.mp3"
         
         "???" "Excuse me!" 
-        
-        play sound "audio/running.mp3"
+        mc "(Huh?)"
+    
         "???" "move-MOVEMOVEMOVEMOVE"
         
-        hide mc neutral with vpunch
+        with vpunch
         play sound "audio/s_shove2.ogg"
+        play music "audio/bgm/pillow_dreams.mp3" fadein 4.0 volume 0.3 loop
         
         # Introduce Andrea
+        show mc neutral at left:
+            zoom 1.5
+            
         show andrea dismayed at right: 
             zoom 1.5
         with dissolve
         
-
         a "Shit, are you okay?" 
         
-        show mc neutral at left:
-            zoom 1.5
-        with dissolve
         mc "Mmm."
         mc "Siguro?"
         
         show andrea sad at right
-        "???" "I'm so sorry, I was in a hurry and kala ko walang tao dito. {w}Nasaktan ka ba?"
+        a "I'm so sorry, I was in a hurry and kala ko walang tao dito. {w}Nasaktan ka ba?"
         
         show mc neutral at left
         mc "You missed my head, sayang."
         
-        show andrea happy at right # Andrea laughs, relieved that MC is joking
-        "???" "...noted for next time?"
+        show andrea happy at right 
+        a "...noted for next time?"
 
         "She laughs and looks relieved for some reason. She then picks up her scattered things on the floor."
         
@@ -567,7 +619,7 @@ label start:
                 jump ignoreAndrea
 
     label helpAndrea:
-        # + relationship point with Andrea 
+        $ andrea_rel += 1 # + relationship point with Andrea 
         
         show mc neutral at left
         mc "Here, let me grab that."
@@ -581,7 +633,7 @@ label start:
         jump ontinueAndrea
 
     label ignoreAndrea:
-        # - relationship point with Andrea
+        $ andrea_rel -= 1 # - relationship point with Andrea
         
         show mc neutral at left
         mc "Don't worry about me. But you should probably hurry up."
@@ -598,35 +650,54 @@ label start:
         jump ontinueAndrea
 
     label ontinueAndrea:
+        show mc neutral at left
+        mc "Wait, hold on."
         mc "You're Andrea?"
+        show andrea happy at right #insert andrea curious / confused sprite 
         a "Hm? Yeah, Bakit?"
+        show andrea neutral at right
         a "...wait, classmate kita diba?"
 
         mc "Groupmate mo, actually.."
         a "Groupmate? May project tayo?"
         a "Before that though, {w}can you remind me of your name again?"
 
+        show mc cringe at left
         mc "You seriously don't know? {w}Its-{nw}"
+        show andrea dismayed at right
         a "WAIT, is it..."
         a "Mikaela?"
+        show mc angry at left
         mc "Who the hell is that?"
+        show andrea happy at right
         a "Danica!"
+        show mc neutral at left
         mc "???"
 
+        show andrea sad at right
         "*She tries looking at my I.D. but my name was covered by a sticker.*"
         a "Uhh, I forgot."
-        mc "It's {firstname}, {firstname} {lastname}."
-        a "{firstname}, how did I forget? {w}Anyway, I hope your head's fine."
-        mc "Yeah, I'm okay. But uh, weren't you in a hurry? {w} Tumatakbo ka 'e."
+        mc "It's [firstname], [firstname] [lastname]."
+        show andrea happy at right
+        a "[firstname], how did I forget? {w}Anyway, I hope your head's fine."
+        show mc neutral at left
+        mc "Yeah, I'm okay. But uh, weren't you in a hurry? {w}You were running down the hallway."
         a "OH RIGHT. Late na kasi ako."
         "*She checks her things one last time before leaving.*"
 
         a "Di ka rin ba papasok? Classes aren't over yet."
+        show mc cringe at left
         mc "I'll follow later, I was on my way to the cr."
 
         a "kayyy, I'll see you later."
 
+        hide andrea happy with dissolve
         "With that, she enters the classroom and I was left alone again in the hallway."
+        
+        show mc neutral at center :
+            zoom 1.5
+        with dissolve
+
         mc "Now, should I go back?"
         mc "I have this thing called free will."
         mc "Gives me the option to always just avoid this whole mess altogether."
@@ -639,28 +710,17 @@ label start:
             "Leave.":
                 jump leaveShool
 
-    label headBackInside:
-        
-        # Stop the campus sound effects
-        stop sound
+    label leaveShool:
         stop music fadeout 1.0
-        
-        # Go back to the main classroom scene (assuming you'll continue with the rest of the class)
-        scene bg classroom
-        with dissolve
-        
-        # (Continue the script here)
-        # return # Or return to end the demo/script
-
-    label leaveShool
+        hide mc neutral with dissolve
         "Are you sure? Actually leave?"
         "Like, really?"
     
-    menu:
-        "Yep.":
-            jump endingQuitter
-        "On second thought, go back inside.":
-            jump headBackInside
+        menu:
+            "Yep.":
+                jump endingQuitter
+            "On second thought, go back inside.":
+                jump headBackInside
 
     label endingQuitter:
         "I sighed one last time, turned around, and walked away from the school."
@@ -668,9 +728,426 @@ label start:
         "..."
         "....."
         "......."
-        "Ending: The Quitter"
+        "Ending: Quitter"
         "jeez you didn't even try."
         "bye."
+        return
 
-    stop music fadeout 1.0
-    return
+    label headBackInside:
+    stop music fadeout 1.0 
+    stop sound 
+
+    scene bg classroom
+    with dissolve
+    
+    play sound "audio/a_classroom1.ogg" volume 0.5 loop
+
+    show mc neutral at left:
+        zoom 1.5
+    
+    mc "(I definitely took the long route to the comfort room.)"
+
+    "When I walked back, I found myself in a noisy class divided into small seats organized according to their groups."
+    
+    show cassie neutral at right:
+        zoom 1.5
+    with dissolve
+    "I first saw the professor looking at me in her peripheral but ultimately ending up ignoring me as I walk inside, which was relieving, honestly."
+    
+    hide cassie neutral with dissolve 
+    hide mc neutral with dissolve
+    
+    "I recognize my other groupmates in the corner of the room talking with each other."
+
+    show kira neutral at right:
+        zoom 1.5
+    
+    show andrea sad at left:
+        zoom 1.5
+    
+    "I saw Andrea having an oddly serious look while listening to the orange-haired girl."
+
+    "The orange-haired girl, who I presume is Kira, was writing the draft ideas on a yellow pad {w}and she didn't look like she was enjoying this brainstorming session so far."
+    
+    show kira sarcastic at right
+    k "We don't have the budget to experiment with gimmicks. Let's just stick with something straightforward and practical."
+    
+    show andrea dismayed at left
+    a "Yeah, but if it's too basic, wala nang bibili. Let's make it interesting naman."
+    
+    # Rafaela suggestion
+    show rafaela happy at center:
+        zoom 1.5
+
+    r "We could do a FNAF style cupcake booth, and we're like animatronics type shit."
+    
+    show andrea happy at left
+    a "Lowkey kind of genius."
+
+    show kira worried at right 
+    k "No."
+    k "No FNAF, no animatronics. Let's actually use our brains to think of something better." 
+    
+    show andrea neutral at left
+    "Andrea grumbles."
+
+    k "I just want something that the professor would like and secure us a sponsored slot. We don't have to do anything flashy right now, Just something that would sell."
+    a "Can't we just use the siomai idea?"
+    
+    show kira sarcastic at right
+    k "There will be a billion stalls selling the exact same thing, no?"
+    
+    show andrea dismayed at left
+    "Andrea grumbles again and just opens her phone to use Tiktok."
+
+    hide andrea dismayed with dissolve
+
+    show rafaela neutral at center
+    r "Wait. Hold up."
+    r "What if League of Legends themed delicacies."
+    
+    show kira confused at right
+    k "What does that even mean?"
+
+    # --- Self-Intro ---
+    hide rafaela neutral with dissolve
+    show mc neutral at center:
+        zoom 1.5
+    with dissolve
+
+    mc "I finally cleared my throat."
+
+    show kira neutral at right
+    k "Finally. You're late. Sit."
+    
+    mc "Glad to be here. I'm [firstname], by the way. This sounds like a fun group."
+
+    k "You know who we are. Then sit and focus. We need to pitch something, there are only three sponsor slots."
+    
+    show andrea neutral at left
+    a "Jamie's not even here."
+    
+    show kira neutral at right
+    k "I made a messenger groupchat, if she doesn't reply by Friday, I'll ask the prof to drop her from the group."
+
+    show mc neutral at center
+    mc "Isn't that a bit harsh?"
+    
+    show kira sarcastic at right
+    k "I'm just tired of deadweights."
+    
+    hide andrea neutral with dissolve
+    show rafaela happy at left:
+        with zoom 1.5
+    with dissolve
+    
+    r "Maybe she died."
+    
+    show mc happy at center
+    mc "Mood."
+
+    show rafaela neutral at left
+    r "So uh, no animatronics?"
+    
+    show kira sarcastic at right
+
+    ## WIP HERE
+    ## EDIT HERE
+    ## BOOKMARK
+
+    "Kira seems to ignore her."
+    k "Anyway, so?"
+    
+    show mc neutral at left
+    mc "Coffee jelly is always good. We can prep it in batches, it's cheap, people buy it."
+    
+    show andrea dismayed at right
+    a "Like Kira said, I bet there will be like ten other groups from other classes selling the exact same thing."
+    a "Can we please consider something fun, though?"
+    
+    show mc neutral at left
+    mc "League themed coffee jelly then."
+    
+    show rafaela happy at right
+    r "Straight from the summoner's rift."
+    
+    show kira worried at center # Kira is starting to stress
+    k "What the hell are you guys talking about?"
+    k "I swear to god, if this project tanks my grade..."
+
+    # --- MC Confrontation ---
+    show mc neutral at left
+    mc "..."
+    mc "(This girl... I'm getting reaalllyy tired of people trying to boss me around.)"
+    mc "(Always so stuck up, always so...)"
+    
+    show kira angry at center
+    k "Do you want to say something, [firstname]?"
+    
+    show mc angry at left
+    mc "..."
+    mc "Matter of fact. I do."
+    k "And that is?"
+    mc "If this project tanks YOUR grade... then what?"
+    mc "You gonna drop all of us and work alone in the booth? Calm down."
+    
+    $ kira_rel -= 1
+    $ rafaela_rel += 1 
+    
+    show rafaela happy at right
+    r "Yo, she talks back. I like her."
+
+    # --- Sponsor Slot 1 Announcement ---
+    play sound "audio/s_notification.ogg"
+    "*DING*"
+    "Before it could escalate even more, the professor rings a bell on her table to announce something."
+
+    show cassie neutral at right
+    
+    c "Okay, students. Just to update you all, the first sponsor slot has been officially claimed."
+    c "Congrats to group one for their spam musubi 'Missubibi' proposal."
+    c "Group one, please come here to discuss the details of the sponsor. The rest may continue."
+
+    "Claps and groans were scattered from the class."
+    
+    show kira dismayed at center # Kira is visibly stressed about losing the slot
+    "Kira grumbles and then looks at me."
+
+    k "..."
+    "It really seemed like she was about to say something but decided against it."
+    
+    # --- Cookies Discussion & Theft ---
+    
+    show kira neutral at center
+    show andrea neutral at right
+    show rafaela neutral at right
+    
+    show andrea neutral at right
+    a "...what if cookies nalang?"
+    
+    show kira sarcastic at center
+    k "Do you even know how to bake?"
+    
+    show andrea neutral at right
+    a "I did once! And they didn't taste bad."
+    
+    show rafaela happy at right
+    r "Wait, that's a banger idea."
+    
+    show kira neutral at center
+    k "Okay, that's good, we're saved."
+    k "I'll think of something to make it more interesting, since that's what you guys want."
+
+    show andrea neutral at right
+    a "Uy, wait. Si Jamie nag-seen na sa groupchat, should we wait for her input before submitting it to the prof?"
+    
+    show kira neutral at center
+    k "...sure, let's do that."
+    "........"
+    "....."
+    "..."
+    "After waiting for ten minutes, Jamie didn't message at all and nothing of value was gained."
+
+    # Sponsor Slot 2 Announcement (Idea stolen)
+    play sound "audio/s_notification.ogg"
+    "*DING*"
+    show cassie neutral at right
+    c "Announcement, the second sponsor slot is officially taken. Group four is selling assorted cookies and desserts. Please proceed to the front."
+
+    "The class claps and groans again."
+    
+    hide cassie neutral with dissolve
+    show rafaela dismayed at right # Rafaela is shocked/disappointed
+    r "They fucking stole our idea."
+    
+    show mc neutral at left
+    mc "Well, at least we proved it was a good idea."
+    
+    show kira angry at center
+    k "You think this is funny?"
+    
+    show mc happy at left # Sarcastic/lighthearted
+    mc "A little."
+
+    "Looking over to the rest of the group, I see both Rafaela and Andrea on their phones. Good idea, doomscrolling might be more productive than what we're doing right now."
+
+    show k angry at center
+    k "You're not even trying."
+    
+    show mc neutral at left
+    mc "Neither is half the class."
+    k "But we're not half the class. Put in some effort."
+
+    "I roll my eyes."
+    mc "Y'all were seriously getting angry earlier over nothing. It's hard to take it seriously."
+
+    show kira neutral at center
+    k "..."
+    k "Then why are you even here if you're not gonna take it seriously?"
+    mc "Because it's a requirement? Like everyone else?"
+    k "Then act like it matters!"
+    
+    show mc sad at left # MC is getting emotionally invested now
+    mc "..."
+    show kira angry at center
+    k "You know, if you’re planning to laze around the whole meeting, maybe just tell us now so we can adjust."
+    mc "I’m listening. I just don’t see why you’re acting like this is life or death."
+    k "Oh, I don’t know, maybe because it’s forty percent of our final grade?"
+    mc "I thought it was better to shut up than being a hardass and dramatic over a project."
+
+    show andrea neutral at right
+    a "Guys, can we not... fight?"
+    
+    show kira angry at center
+    k "We're not fighting. May nangiinis lang."
+    
+    show mc angry at left
+    mc "May pabida 'e."
+    
+    show andrea dismayed at right
+    a "What's both of your problems, seriously?"
+    
+    show kira sarcastic at center
+    k "Gee, I wonder."
+    
+    show rafaela neutral at right
+    r "So, what are you guys saying?"
+    
+    show kira angry at center
+    k "I’m saying that if no one actually does anything, I’m not going to sit here wasting my time. I can just join another group."
+    
+    show andrea dismayed at right
+    a "...okay. Okay, wow."
+    
+    show mc angry at left
+    mc "Then drop us. We're all dying to be free."
+    
+    show andrea sad at right
+    a "Guys, please naman..."
+    
+    show rafaela happy at right
+    r "What if you guys punch each other?"
+    
+    show kira angry at center
+    k "You know what? Aalis nalang ako-"
+
+    # --- Andrea's Breakdown ---
+    
+    show a cry at right # Andrea's highest emotion
+    with vpunch # Screen shake for the yell
+    a "CAN YOU ALL JUST SHUT UP?"
+    
+    # TOTAL SILENCE HERE. CUT ALL AMBIENCE
+    stop sound # Stop a_classroom1.ogg
+    
+    show kira dismayed at center
+    show mc sad at left
+    show rafaela dismayed at right
+
+    "Silence."
+    
+    "The whole class seems to be listening to us now."
+    "..."
+    "We let the silence linger until the groups start talking amongst themselves again."
+    play sound "audio/a_classroom1.ogg" volume 0.5 loop # Restart quiet ambiance
+
+    show andrea sad at right
+    a "Uh.."
+    a "I didn't mean to yell."
+    a "Sorry, I just... kung babagsak ako dito, If I fail the course, I have to repeat the year. And... I can't do that."
+    
+    show mc cringe at left
+    mc "Uh..."
+    mc" ..."
+
+    mc "(Shit, What the hell do I say to that?)"
+    mc "(Sorry. I'm gonna fail, too. Don't worry?)"
+    mc "(Tangina.)"
+
+    show andrea sad at right
+    a "Sorry. I... I just need some air."
+    "She grabs her phone and walks out without waiting for permission."
+    
+    show kira dismayed at center
+    "Kira also stands up to join a group with her friends in it. Probably to try and join them."
+    
+    show mc neutral at left
+    mc "(But, I doubt that will happen. The prof did explicitly tell us that changing groups isn't allowed.)"
+
+    $ andrea_rel -= 1
+    $ kira_rel -= 1
+
+    # Hide Kira and Andrea who just left
+    hide kira dismayed with dissolve
+    hide andrea sad with dissolve
+
+    show r neutral at right
+    r "Uh, now what? Are we still doing cookies?"
+    
+    show mc sad at left
+    mc "..."
+    mc "(This group is a mess.)"
+
+    # --- Final Deadlock ---
+
+    show rafaela neutral at right
+    r "Seriously, what now?"
+    mc "We bake our own cookies and sabotage group four?"
+    r "I don't even have an oven."
+    mc "...same."
+    "I didn't know what to add after that."
+    "At least when the rest were here, we were discussing something. Now it's just too quiet."
+    "Andrea and Kira's chair were empty, they never came back."
+
+    show mc neutral at left
+    mc "You think Andrea's okay?"
+    r "Probably not. I don't know."
+    mc "My brain feels like it's melting."
+    r "Same."
+
+    "Time drags on. The class were still talking about what to do with their groups, some were even arguing but nothing comparable to what happened earlier."
+
+    "I stared at the clock. Ten minutes passed. Then fifteen."
+
+    "The group beside us is already sketching their booth layout. Another one is practicing how to sell their product. All I had in front of me was a doodle that Rafaela made of a cupcake getting eaten by an animatronic fox."
+
+    # --- Final Sponsor Slot Announcement ---
+    play sound "audio/s_notification.ogg"
+    "*DING*"
+    
+    show cassie neutral at right
+    c "Final announcement. Group six just submitted their pitch and claimed the final sponsor slot."
+
+    "Murmurs spread through the class."
+
+    c "To the rest of the class, don't panic. You can still get booths, but you'll have to provide your own tents and coordinate with the student event organizers on where you'll be placing them. But again, having a booth is entirely optional."
+    c "If you need further guidance, just contact me."
+
+    "The professor closes her laptop and dismisses the class."
+    
+    # --- Scene Exit ---
+    hide cassie neutral with dissolve
+    "The students start leaving one by one, some were still discussing what to do with their projects, but some just looked so done with it."
+    
+    show rafaela neutral at right
+    "I noticed Rafaela getting up her seat."
+
+    mc "Where are you going?"
+    r "Ima dip."
+    
+    show mc sad at left
+    mc "Hey-"
+    mc "(Aaaand she's gone. Great.)"
+    
+    hide r neutral with dissolve
+    
+    "Silence settled in again. This time. I was alone in the room."
+    "I didn't really like this kind of quiet. It made you think."
+
+    show mc cringe at center
+    mc "Tangina talaga."
+
+    "I got up and went home."
+
+    jump Home # Start the next scene/label
+    
