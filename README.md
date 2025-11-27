@@ -12,7 +12,7 @@
 
 **Current Progress:**
 * Arc 1 (out of [e.g., 3 arcs total]) is fully written.
-* Coding is approximately **50% complete** for Arc 1.
+* Coding is approximately **15% complete** for Arc 1.
 * Initial character sprites and background assets are implemented.
 
 ---
