@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 841: expected 'comma or end of line' not found.
-    with zoom 1.5
-    ^
+File "game/script.rpy", line 1045: expected simple expression
+    stop music fadeout
+                      ^
 
 Ren'Py Version: Ren'Py 8.4.1.25072401
-Sat Nov 29 00:22:09 2025
+Sat Nov 29 04:42:43 2025

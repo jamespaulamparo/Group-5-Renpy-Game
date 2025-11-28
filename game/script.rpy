@@ -505,7 +505,7 @@ label start:
 
         "..."
         show cassie neutral at right
-        c "...look. I don’t care if you fail your other classes or end up having to stop your education."
+        c "...look. {w}I don’t care if you fail your other classes or end up having to stop your education."
         c "But you’re in my class right now. So I care just enough to tell you this."
         c "You’re better than what you’re settling for."
 
@@ -522,10 +522,9 @@ label start:
         hide cassie neutral with dissolve
         
         show mc neutral at left
-        mc "(God, why do people always expect more?)"
+        mc "(I hate this.)"
         mc "(Is it that hard to mind your own business?)"
         mc "(...whatever. Not like this changes anything.)"
-        mc "(Right?)"
         "..."
         mc "(I don't want to go back.)"
 
@@ -581,9 +580,9 @@ label start:
     
         "???" "move-MOVEMOVEMOVEMOVE"
         
-        with vpunch
         play sound "audio/s_shove2.ogg"
-        play music "audio/bgm/pillow_dreams.mp3" fadein 2.0 volume 0.5 loop
+        with vpunch
+        play music "audio/bgm/pillow_dreams.mp3" fadein 5.0 volume 0.5 loop
 
         
         # Introduce Andrea
@@ -626,7 +625,7 @@ label start:
         mc "Here, let me grab that."
         
         show andrea happy at right
-        a "Oh. {w}Thank youuuu."
+        a "Oh. {w}Thank youuuu~"
 
         "On one of the notebooks that was scattered, I noticed her name on the cover."
         "Andrea Gale Morales."
@@ -741,7 +740,7 @@ label start:
     scene bg classroom
     with dissolve
     
-    play sound "audio/a_classroom1.ogg" volume 0.5 loop
+    play music "audio/a_classroom1.ogg" volume 1.3 loop
 
     show mc neutral at left:
         zoom 1.5
@@ -768,9 +767,9 @@ label start:
         zoom 1.5
     with dissolve
     
-    "I saw Andrea having an oddly serious look while listening to the orange-haired girl."
+    "Andrea has an oddly serious face while listening to an orange-haired girl."
 
-    "The orange-haired girl, who I presume is Kira, was writing the draft ideas on a yellow pad {w}and she didn't look like she was enjoying this brainstorming session so far."
+    "The orange-haired girl, who I presume is Kira, was writing something on a yellow pad {w}and it doesn't look like she's enjoying this brainstorming session so far."
     
     show kira sarcastic at right
     k "We don't have the budget to experiment with gimmicks. Let's just stick with something straightforward and practical."
@@ -781,6 +780,7 @@ label start:
     # Rafaela suggestion
     show rafaela happy at center:
         zoom 1.5
+    with vpunch
 
     r "We could do a FNAF style cupcake booth, and we're like animatronics type shit."
     
@@ -823,6 +823,7 @@ label start:
     show kira neutral at right
     k "Finally. You're late. Sit."
     
+    play sound "audio/chair_move.mp3" volume 0.55
     mc "Glad to be here. I'm [firstname], by the way. This sounds like a fun group."
 
     k "You know who we are. Then sit and focus. We need to pitch something, there are only three sponsor slots."
@@ -856,10 +857,6 @@ label start:
     r "So uh, no animatronics?"
     
     show kira sarcastic at right
-
-    ## WIP HERE
-    ## EDIT HERE
-    ## BOOKMARK
 
     "*Kira seems to ignore her.*"
     k "Anyway, so?"
@@ -902,8 +899,8 @@ label start:
     mc "..."
     mc "Matter of fact. I do."
     k "And that is?"
-    mc "If this project tanks YOUR grade... then what?"
-    mc "You gonna drop all of us and work alone in the booth? Calm down."
+    mc "If this project tanks YOUR grade... {w}then what?"
+    mc "You gonna drop all of us and work alone in the booth? {w}Calm down."
     
     $ kira_rel -= 1
     $ rafaela_rel += 1 
@@ -912,7 +909,7 @@ label start:
     r "Yo, she talks back. I like her."
 
     # --- Sponsor Slot 1 Announcement ---
-    play sound "audio/s_notification.ogg"
+    play sound "audio/s_notification.ogg" # needs a better ring sound sfx
     "*DING*"
     "Before it could escalate even more, the professor rings a bell on her table to announce something."
 
@@ -927,11 +924,12 @@ label start:
     c "Okay, students. Just to update you all, the first sponsor slot has been officially claimed."
     c "Congrats to group one for their spam musubi 'Missubibi' proposal."
     c "Group one, please come here to discuss the details of the sponsor. The rest may continue."
-
+    
+    # needs an applause and groans sfx from students here
     "*Claps and groans were scattered from the class.*"
     
     hide cassie neutral with dissolve
-    show kira worried at center: # CG SCENE
+    show kira worried at center: # CG SCENE ILLUSTRATION
         zoom 1.5
     with dissolve
     "*Kira grumbles and then looks at me.*"
@@ -957,7 +955,7 @@ label start:
     k "Do you even know how to bake?"
     
     show andrea neutral at left
-    a "Isang beses lang pero masarap naman."
+    a "Isang beses lang nasubukan magbake, {w}pero masarap naman."
     
     show rafaela happy at center
     r "Wait, that's a banger idea."
@@ -967,13 +965,15 @@ label start:
     k "I'll think of something to make it more interesting, since that's what *you guys* want."
 
     hide rafaela happy with dissolve
-    show mc neutral at left:
+    show mc neutral at center:
         zoom 1.5
     with dissolve
     mc "(What's with the emphasis?)"
 
+    play sound "audio/s_phone_vibration.mp3"
     show andrea neutral at left
     a "Uy, wait. Si Jamie nag-seen na sa groupchat, {w}should we wait for her input before submitting it to the prof?"
+    mc "(Oh yeah, groupmate nga pala namin siya.)"
     
     show kira neutral at right
     k "...sure, let's do that."
@@ -986,7 +986,7 @@ label start:
     "..."
     "After waiting for ten minutes, Jamie didn't message at all and nothing of value was gained."
 
-    # Sponsor Slot 2 Announcement (Idea stolen)
+    # Sponsor Slot 2 
     play sound "audio/s_notification.ogg"
     "*DING*"
     show cassie neutral at center:
@@ -997,110 +997,219 @@ label start:
     "*The class claps and groans again.*"
 
     hide cassie neutral with dissolve
-    show rafaela neutral at center:
+    show rafaela neutral at left:
         zoom 1.5
     with dissolve
     r "They fucking stole our idea."
     
-    show mc neutral at left:
+    show mc neutral at center:
         zoom 1.5
     with dissolve
     mc "Well, at least we proved it was a good idea."
     
-    show kira angry at center
+    show kira worried at right:
+        zoom 1.5
+    with dissolve
     k "You think this is funny?"
     
-    show mc happy at left # Sarcastic/lighthearted
+    show mc happy at center 
     mc "A little."
 
-    "Looking over to the rest of the group, I see both Rafaela and Andrea on their phones. Good idea, doomscrolling might be more productive than what we're doing right now."
+    "Once again, Kira looks like she's about to say something but just sighs."
+    hide kira worried with dissolve
 
-    show k angry at center
-    k "You're not even trying."
+    show andrea neutral at right:
+        zoom 1.5
+    with dissolve
+
+    show mc neutral at center:
+        zoom 1.5
+    with dissolve
+
+
+    "Looking over to the rest of the group, {w}I see both Rafaela and Andrea on their phones."
+    "(Honestly, not a bad idea.)"
+    "(Doomscrolling might be more productive than what we're doing right now.)"
     
-    show mc neutral at left
-    mc "Neither is half the class."
-    k "But we're not half the class. Put in some effort."
+    hide rafaela neutral with dissolve
+    hide mc neutral with dissolve
+    hide andrea neutral with dissolve
+    "........"
+    "....."
+    "..."
+    show mc neutral at center:
+        zoom 1.5
+    with dissolve
+    "And doomscroll I did. {w}The others were occassionaly sharing ideas but it eventually goes nowhere."
+    # cg illustration of looking at a phone here while kira is staring at Sabrina
+    # insert an atual funny meme you'll see srolling through reels and shorts tho, like maybe a short lip or some shit
+    stop music fadeout 1.0
+    play sound "audio/vineboom.mp3" volume 0.3
+    mc "(Heh, {w}funny vine boom sound.)"
+    play sound "audio/vineboom.mp3" volume 0.3 loop
 
-    "I roll my eyes."
-    mc "Y'all were seriously getting angry earlier over nothing. It's hard to take it seriously."
+    mc "(Heh heh.)"
+    play sound "audio/rustle.mp3" volume 0.3
+    hide mc neutral with dissolve
+    "*Someone elbows me.*"
+    show rafaela neutral at right:
+        zoom 1.5
+    with dissolve
 
-    show kira neutral at center
+    show mc neutral at left:
+        zoom 1.5
+    with dissolve
+    r "Yo, {w}she's calling you."
+    mc "Huh?"
+
+    hide rafaela neutral with dissolve
+
+    show kira neutral at right:
+        zoom 1.5
+    with dissolve
+  
+    play sound "audio/a_classroom1.ogg" volume 1.0 loop
+    play music "audio/bgm/UT_Threat Imminent.mp3" fadein 2.0 volume 0.6 
     k "..."
-    k "Then why are you even here if you're not gonna take it seriously?"
+    mc "So..."
+    mc "Why're you staring at me? {w}Okay ka lang?"
+    k "You're not even trying."
+    mc "Sorry?"
+    k "Tulungan mo naman mag-suggest ng kahit ano. Wag puro tawa."
+    mc "I already suggested something???"
+    "*Kira just sighs and writes something down*"
+    mc "Look, {w}even half the class isn't doing much either."
+    k "But we're not half the class. Put in more effort."
+
+    "*I roll my eyes.*"
+    mc "(This girl...)"
+    mc "You are seriously getting worked up over nothing. May ambag naman ako eh."
+    k "I'm not angry, I'm... {w}I'm just saying that-{nw}"
+    mc "What's the point of this, anyway?"
+    mc "I can't take this project seriously."
+
+    show kira neutral at right
+    k "..."
+    k "Why are you even here if you're not gonna take this seriously?"
     mc "Because it's a requirement? Like everyone else?"
-    k "Then act like it matters!"
+    show kira worried at right
+    k "Then at least act like it matters!"
     
-    show mc sad at left # MC is getting emotionally invested now
     mc "..."
-    show kira angry at center
-    k "You know, if you’re planning to laze around the whole meeting, maybe just tell us now so we can adjust."
+    show kira sarcastic at right
+    k "You know, if *you’re* planning to laze around the whole meeting, maybe just tell us now so we can adjust."
+    k "Kanina mo pa ako tinititigan ng masama."
+
+    mc "I.."
+    mc "(I don't know what to say, {w}Seems like she already set her mind to be against me.)"
+    "(I glanced around the room. A few groups were looking at us now. {w}None of them looks like they were taking my side.)"
+    "..."
+    mc "(The others are on their phones, pero bakit ako lang yung sinasabihan?)"
+    mc "(Bakit, ganito na ba talaga yung imahe nila sakin? {w}Tamad? {w}Walang nagagawang tama?)"
+    mc "(Whatever.)"
+    
+    k "I'm just setting boundaries now, {w}para mas madali sa lahat."
+    k "So, do you get it?"
+    show mc cringe at left
     mc "I’m listening. I just don’t see why you’re acting like this is life or death."
-    k "Oh, I don’t know, maybe because it’s forty percent of our final grade?"
+    k "Oh, I don’t know, {w}maybe because it’s *sixty percent* of our final grade?"
     mc "I thought it was better to shut up than being a hardass and dramatic over a project."
 
-    show andrea neutral at right
+
+    show andrea neutral at center:
+        zoom 1.5
+    with dissolve
     a "Guys, can we not... fight?"
     
-    show kira angry at center
     k "We're not fighting. May nangiinis lang."
     
     show mc angry at left
     mc "May pabida 'e."
     
-    show andrea dismayed at right
+    show andrea dismayed at center
     a "What's both of your problems, seriously?"
     
-    show kira sarcastic at center
+    show kira sarcastic at right
     k "Gee, I wonder."
     
-    show rafaela neutral at right
+    hide andrea dismayed with dissolve
+    show rafaela neutral at center:
+        zoom 1.5
+    with dissolve
     r "So, what are you guys saying?"
     
-    show kira angry at center
+    show kira neutral at right
     k "I’m saying that if no one actually does anything, I’m not going to sit here wasting my time. I can just join another group."
     
-    show andrea dismayed at right
-    a "...okay. Okay, wow."
+    hide rafaela neutral with dissolve
+    show andrea dismayed at center:
+        zoom 1.5
+    with dissolve
+    a "...okay. {w}Okay, wow."
     
-    show mc angry at left
+    show mc cringe at left
     mc "Then drop us. We're all dying to be free."
     
-    show andrea sad at right
+    show andrea sad at center
     a "Guys, please naman..."
     
-    show rafaela happy at right
+    hide andrea sad with dissolve
+
+    show rafaela happy at center:
+        zoom 1.5
+    with dissolve
     r "What if you guys punch each other?"
     
-    show kira angry at center
-    k "You know what? Aalis nalang ako-"
+    show kira sarcastic at right
+    k "You know what? {w}Aalis nalang ako-{nw}"
 
-    # --- Andrea's Breakdown ---
+    # Andrea's Breakdown
     
-    show a cry at right # Andrea's highest emotion
-    with vpunch # Screen shake for the yell
+    hide kira sarcastic
+    hide rafaela happy 
+    hide mc cringe 
+
+    
+    show andrea cry at center:
+        zoom 1.5
+    with vpunch 
+ 
+    stop sound
+    stop music
+
+    play sound "audio/stand_up.mp3" volume 0.75
+
     a "CAN YOU ALL JUST SHUT UP?"
     
+    # CG ILLUSTRATION SCENE HERE
     # TOTAL SILENCE HERE. CUT ALL AMBIENCE
-    stop sound # Stop a_classroom1.ogg
-    
-    show kira dismayed at center
-    show mc sad at left
-    show rafaela dismayed at right
+   
 
+    "........"
+    "....."
+    "..."
     "Silence."
     
     "The whole class seems to be listening to us now."
     "..."
+    play music "audio/a_classroom1.ogg" volume 1.2 loop
     "We let the silence linger until the groups start talking amongst themselves again."
-    play sound "audio/a_classroom1.ogg" volume 0.5 loop # Restart quiet ambiance
+    
+    show andrea sad at left:
+        zoom 1.5
+    with dissolve
 
-    show andrea sad at right
-    a "Uh.."
+    show mc neutral at center:
+        zoom 1.5
+    with dissolve
+
+    show kira sarcastic at right:
+        zoom 1.5
+    with dissolve
+    a "Uh..."
     a "I didn't mean to yell."
     a "Sorry, I just... kung babagsak ako dito, If I fail the course, I have to repeat the year. And... I can't do that."
-    
-    show mc cringe at left
+
     mc "Uh..."
     mc" ..."
 
@@ -1108,31 +1217,42 @@ label start:
     mc "(Sorry. I'm gonna fail, too. Don't worry?)"
     mc "(Tangina.)"
 
-    show andrea sad at right
-    a "Sorry. I... I just need some air."
-    "She grabs her phone and walks out without waiting for permission."
+    a "Sorry. {w}I... {w}I just need some air."
+    play sound "audio/chair_move.mp3" volume 0.55
+    hide andrea sad with dissolve
+    "*She grabs her phone and walks out without waiting for permission.*"
     
-    show kira dismayed at center
-    "Kira also stands up to join a group with her friends in it. Probably to try and join them."
+    hide kira sarcastic at right with dissolve
+    "*Kira also stands up to join a group with her friends in it.*"
+    mc "(She's probably going try and join other groups.)"
     
-    show mc neutral at left
+    show mc cringe at center
     mc "(But, I doubt that will happen. The prof did explicitly tell us that changing groups isn't allowed.)"
 
     $ andrea_rel -= 1
     $ kira_rel -= 1
 
-    # Hide Kira and Andrea who just left
-    hide kira dismayed with dissolve
-    hide andrea sad with dissolve
-
-    show r neutral at right
+    hide mc cringe with dissolve
+    show rafaela neutral at right:
+        zoom 1.5
+    with dissolve
     r "Uh, now what? Are we still doing cookies?"
     
-    show mc sad at left
+    show mc sad at left:
+        zoom 1.5
+    with dissolve
     mc "..."
     mc "(This group is a mess.)"
 
-    # --- Final Deadlock ---
+    return
+
+    ## WIP HERE
+    ## EDIT HERE
+    ## BOOKMARK
+
+    
+# --- Start of archived code block ---
+"""
 
     show rafaela neutral at right
     r "Seriously, what now?"
@@ -1193,5 +1313,7 @@ label start:
 
     "I got up and went home."
 
-    jump Home # Start the next scene/label
-    
+"""
+# --- End of archived code block ---
+
+return
