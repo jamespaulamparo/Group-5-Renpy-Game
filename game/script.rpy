@@ -68,7 +68,7 @@ label start:
     show mc neutral at left
     "(Is she talking to me or threatening me? {w}Either way, let’s just get this over with.)"
 
-    define mc = Character("[firstname]", who_color="#72a5d4", what_color="#FFFFFF")
+    define mc = Character("[firstname]", who_color="#FFFFFF", what_color="#FFFFFF")
     python:
         firstname = renpy.input("What is your first name? (Default = Sabrina)", length=15)
         firstname = firstname.strip()
@@ -76,7 +76,7 @@ label start:
         if firstname == "":
             firstname = "Sabrina"
 
-    define mc2 = Character("[lastname]", who_color="#72a5d4", what_color="#FFFFFF")
+    define mc2 = Character("[lastname]", who_color="#FFFFFF", what_color="#FFFFFF")
     python:
         lastname = renpy.input("Now, what is your name name? (Default = Carpintero)", length=15)
         lastname = lastname.strip()
@@ -583,7 +583,8 @@ label start:
         
         with vpunch
         play sound "audio/s_shove2.ogg"
-        play music "audio/bgm/pillow_dreams.mp3" fadein 4.0 volume 0.3 loop
+        play music "audio/bgm/pillow_dreams.mp3" fadein 2.0 volume 0.5 loop
+
         
         # Introduce Andrea
         show mc neutral at left:
@@ -761,9 +762,11 @@ label start:
 
     show kira neutral at right:
         zoom 1.5
+    with dissolve
     
     show andrea sad at left:
         zoom 1.5
+    with dissolve
     
     "I saw Andrea having an oddly serious look while listening to the orange-haired girl."
 
@@ -824,7 +827,9 @@ label start:
 
     k "You know who we are. Then sit and focus. We need to pitch something, there are only three sponsor slots."
     
-    show andrea neutral at left
+    show andrea neutral at left:
+        zoom 1.5
+    with dissolve
     a "Jamie's not even here."
     
     show kira neutral at right
@@ -836,9 +841,10 @@ label start:
     show kira sarcastic at right
     k "I'm just tired of deadweights."
     
-    hide andrea neutral with dissolve
+    hide andrea neutral
+
     show rafaela happy at left:
-        with zoom 1.5
+        zoom 1.5
     with dissolve
     
     r "Maybe she died."
@@ -865,30 +871,34 @@ label start:
     show andrea dismayed at left:
         zoom 1.5
     with dissolve
-    
+
     a "Sabi nga ni Kira, I bet there will be like ten other groups from other classes selling the exact same thing."
     a "Can we please consider something fun, though?"
     
-    show mc neutral at left
+    show mc neutral at center
     mc "League themed coffee jelly then."
     
-    show rafaela happy at right
+    hide andrea dismayed with dissolve
+
+    show rafaela neutral at left:
+        zoom 1.5
+    with dissolve
     r "Straight from the summoner's rift."
     
-    show kira worried at center # Kira is starting to stress
+    show kira worried at right
     k "What the hell are you guys talking about?"
     k "I swear to god, if this project tanks my grade..."
 
     # --- MC Confrontation ---
-    show mc neutral at left
+    show mc cringe at center
     mc "..."
     mc "(This girl... I'm getting reaalllyy tired of people trying to boss me around.)"
     mc "(Always so stuck up, always so...)"
     
-    show kira angry at center
+    show kira neutral at right
     k "Do you want to say something, [firstname]?"
     
-    show mc angry at left
+    show mc angry at center
     mc "..."
     mc "Matter of fact. I do."
     k "And that is?"
@@ -898,7 +908,7 @@ label start:
     $ kira_rel -= 1
     $ rafaela_rel += 1 
     
-    show rafaela happy at right
+    show rafaela happy at left
     r "Yo, she talks back. I like her."
 
     # --- Sponsor Slot 1 Announcement ---
@@ -906,47 +916,65 @@ label start:
     "*DING*"
     "Before it could escalate even more, the professor rings a bell on her table to announce something."
 
-    show cassie neutral at right
+    hide rafaela happy with dissolve
+    hide mc angry with dissolve
+    hide kira neutral with dissolve
+
+    show cassie neutral at center:
+        zoom 1.5
+    with dissolve 
     
     c "Okay, students. Just to update you all, the first sponsor slot has been officially claimed."
     c "Congrats to group one for their spam musubi 'Missubibi' proposal."
     c "Group one, please come here to discuss the details of the sponsor. The rest may continue."
 
-    "Claps and groans were scattered from the class."
+    "*Claps and groans were scattered from the class.*"
     
-    show kira dismayed at center # Kira is visibly stressed about losing the slot
-    "Kira grumbles and then looks at me."
+    hide cassie neutral with dissolve
+    show kira worried at center: # CG SCENE
+        zoom 1.5
+    with dissolve
+    "*Kira grumbles and then looks at me.*"
 
     k "..."
     "It really seemed like she was about to say something but decided against it."
     
     # --- Cookies Discussion & Theft ---
     
-    show kira neutral at center
-    show andrea neutral at right
-    show rafaela neutral at right
+    show kira neutral at right :
+        zoom 1.5
+    with dissolve
+    show andrea neutral at left:
+        zoom 1.5
+    with dissolve
+    show rafaela neutral at center:
+        zoom 1.5
+    with dissolve
     
-    show andrea neutral at right
     a "...what if cookies nalang?"
     
-    show kira sarcastic at center
+    show kira sarcastic at right
     k "Do you even know how to bake?"
     
-    show andrea neutral at right
+    show andrea neutral at left
     a "I did once! And they didn't taste bad."
     
-    show rafaela happy at right
+    show rafaela happy at center
     r "Wait, that's a banger idea."
     
-    show kira neutral at center
+    show kira neutral at right
     k "Okay, that's good, we're saved."
     k "I'll think of something to make it more interesting, since that's what you guys want."
 
-    show andrea neutral at right
-    a "Uy, wait. Si Jamie nag-seen na sa groupchat, should we wait for her input before submitting it to the prof?"
+    show andrea neutral at left
+    a "Uy, wait. Si Jamie nag-seen na sa groupchat, {w}should we wait for her input before submitting it to the prof?"
     
-    show kira neutral at center
+    show kira neutral at right
     k "...sure, let's do that."
+
+    hide andrea neutral with dissolve
+    hide rafaela neutral with dissolve
+    hide kira neutral with dissolve
     "........"
     "....."
     "..."
@@ -955,16 +983,22 @@ label start:
     # Sponsor Slot 2 Announcement (Idea stolen)
     play sound "audio/s_notification.ogg"
     "*DING*"
-    show cassie neutral at right
+    show cassie neutral at center:
+        zoom 1.5
+    with dissolve
     c "Announcement, the second sponsor slot is officially taken. Group four is selling assorted cookies and desserts. Please proceed to the front."
 
-    "The class claps and groans again."
-    
+    "*The class claps and groans again.*"
+
     hide cassie neutral with dissolve
-    show rafaela dismayed at right # Rafaela is shocked/disappointed
+    show rafaela neutral at center:
+        zoom 1.5
+    with dissolve
     r "They fucking stole our idea."
     
-    show mc neutral at left
+    show mc neutral at left:
+        zoom 1.5
+    with dissolve
     mc "Well, at least we proved it was a good idea."
     
     show kira angry at center
