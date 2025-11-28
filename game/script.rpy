@@ -957,14 +957,20 @@ label start:
     k "Do you even know how to bake?"
     
     show andrea neutral at left
-    a "I did once! And they didn't taste bad."
+    a "Isang beses lang pero masarap naman."
     
     show rafaela happy at center
     r "Wait, that's a banger idea."
     
     show kira neutral at right
     k "Okay, that's good, we're saved."
-    k "I'll think of something to make it more interesting, since that's what you guys want."
+    k "I'll think of something to make it more interesting, since that's what *you guys* want."
+
+    hide rafaela happy with dissolve
+    show mc neutral at left:
+        zoom 1.5
+    with dissolve
+    mc "(What's with the emphasis?)"
 
     show andrea neutral at left
     a "Uy, wait. Si Jamie nag-seen na sa groupchat, {w}should we wait for her input before submitting it to the prof?"
@@ -973,7 +979,7 @@ label start:
     k "...sure, let's do that."
 
     hide andrea neutral with dissolve
-    hide rafaela neutral with dissolve
+    hide mc neutral with dissolve
     hide kira neutral with dissolve
     "........"
     "....."
