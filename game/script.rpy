@@ -815,7 +815,7 @@ label start:
         zoom 1.5
     with dissolve
 
-    mc "I finally cleared my throat."
+    "*I cleared my throat.*"
 
     show kira neutral at right
     k "Finally. You're late. Sit."
@@ -855,14 +855,18 @@ label start:
     ## EDIT HERE
     ## BOOKMARK
 
-    "Kira seems to ignore her."
+    "*Kira seems to ignore her.*"
     k "Anyway, so?"
     
-    show mc neutral at left
+    show mc neutral at center
     mc "Coffee jelly is always good. We can prep it in batches, it's cheap, people buy it."
     
-    show andrea dismayed at right
-    a "Like Kira said, I bet there will be like ten other groups from other classes selling the exact same thing."
+    hide rafaela neutral with dissolve
+    show andrea dismayed at left:
+        zoom 1.5
+    with dissolve
+    
+    a "Sabi nga ni Kira, I bet there will be like ten other groups from other classes selling the exact same thing."
     a "Can we please consider something fun, though?"
     
     show mc neutral at left
