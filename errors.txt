@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1045: expected simple expression
-    stop music fadeout
-                      ^
+File "game/script.rpy", line 38: expected end of line
+    play video "images/videos/prologue.webm" hard_stop
+                                             ^
 
 Ren'Py Version: Ren'Py 8.4.1.25072401
-Sat Nov 29 04:42:43 2025
+Sat Nov 29 21:59:03 2025

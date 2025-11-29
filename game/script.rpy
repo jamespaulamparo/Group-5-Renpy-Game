@@ -16,7 +16,7 @@ define h = Character("Haifa", who_color="#93c386", what_color="#FFFFFF")
 
 # ---------------------------------------
 
-# initilization of variables
+# relation points
 default andrea_rel = 0
 default rafaela_rel = 0
 default kira_rel = 0
@@ -26,25 +26,29 @@ default cassie_rel = 0
 default loraine_rel = 0
 default haifa_rel = 0
 
-# Loraine Question Flags
+# question Flags
 default kira_asked = False
 default andrea_asked = False
 default rafaela_asked = False
 default jamie_asked = False
 
 # The game starts here.
-
 label start:
-    play music "audio/bgm/spring.mp3" fadein 2.0 volume 0.6
+
+    $ renpy.movie_cutscene("images/videos/prologue.webm")
+
+    "......."
+    "....."
+    "..."
+
+    play music "audio/bgm/spring.mp3" fadein 7.0 volume 0.6
     scene bg classroom
     with dissolve 
 
     show mc neutral at left:
         zoom 1.5
     with dissolve
-    "......."
-    "....."
-    "..."
+    "(Mmm.)"
 
     "(I wonder how my parents are doing.)"
     
