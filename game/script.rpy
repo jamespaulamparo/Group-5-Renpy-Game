@@ -309,7 +309,7 @@ label start:
         show loraine sweat at right
         "*Loraine looks around and pulls me close, nearly knocking over my chair.*"
         play sound "audio/rustle.mp3"
-        l "Shh, she might overhear. Her ears are probably laser-focused on all nearby slackers, including me."
+        l "Shh, she might overhear."
         
         show loraine neutral at right
         l "Kira's great, yeah, {w}but she has zero chill. Last time I was her groupmate, I couldn't tell if she was being sarcastic or not."
@@ -774,7 +774,7 @@ label start:
     "Andrea has an oddly serious face while listening to an orange-haired girl."
 
     "The orange-haired girl, who I presume is Kira, was writing something on a yellow pad {w}and it doesn't look like she's enjoying this brainstorming session so far."
-    
+    "(I don't know why, but I have a feeling that I won't get along with her at all.)"
     show kira sarcastic at right
     k "We don't have the budget to experiment with gimmicks. Let's just stick with something straightforward and practical."
     
@@ -792,20 +792,20 @@ label start:
     a "Lowkey kind of genius."
 
     show kira worried at right 
-    k "No."
-    k "No FNAF, no animatronics. Let's actually use our brains to think of something better." 
+    k "Seryoso ako ah, wag nga."
     
     show andrea neutral at left
-    "Andrea grumbles."
+    "*Andrea grumbles.*"
 
-    k "I just want something that the professor would like and secure us a sponsored slot. We don't have to do anything flashy right now, Just something that would sell."
+    k "I just want something that the professor would like to secure us a sponsored slot."
+    k "We don't have to do anything flashy right now, Just something that would sell."
     a "Can't we just use the siomai idea?"
     
     show kira sarcastic at right
     k "There will be a billion stalls selling the exact same thing, no?"
     
     show andrea dismayed at left
-    "Andrea grumbles again and just opens her phone to use Tiktok."
+    "*Andrea grumbles again and just opens her phone to use Tiktok.*"
 
     hide andrea dismayed with dissolve
 
@@ -910,7 +910,7 @@ label start:
     $ rafaela_rel += 1 
     
     show rafaela happy at left
-    r "Yo, she talks back. I like her."
+    r "Hell yeah, calm down."
 
     # --- Sponsor Slot 1 Announcement ---
     play sound "audio/s_notification.ogg" # needs a better ring sound sfx
@@ -996,7 +996,7 @@ label start:
     show cassie neutral at center:
         zoom 1.5
     with dissolve
-    c "Announcement, the second sponsor slot is officially taken. Group four is selling assorted cookies and desserts. Please proceed to the front."
+    c "Announcement, the second sponsor slot is officially taken. Group four is selling assorted cookies and desserts. {w}Please proceed to the front."
 
     "*The class claps and groans again.*"
 

@@ -8,11 +8,11 @@
 
 | Status | Version | Last Updated |
 | :--- | :--- | :--- |
-| **In Development** | **v0.0.4 Alpha** | November 29, 2025 |
+| **In Development** | **v0.0.7 Alpha** | November 30, 2025 |
 
 **Current Progress:**
 * Arc 1 (out of [e.g., 3 arcs total]) is fully written.
-* Coding is approximately **15% complete** for Arc 1.
+* Coding is approximately **20% complete** for Arc 1.
 * Initial character sprites and background assets are implemented.
 
 ---
