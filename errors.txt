@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 38: expected end of line
-    play video "images/videos/prologue.webm" hard_stop
-                                             ^
+File "game/screens.rpy", line 345: end of line expected.
+    background "#334D40":hover
+                        ^
 
 Ren'Py Version: Ren'Py 8.4.1.25072401
-Sat Nov 29 21:59:03 2025
+Mon Dec  1 00:09:20 2025

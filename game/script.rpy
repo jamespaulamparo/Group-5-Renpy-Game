@@ -32,6 +32,22 @@ default andrea_asked = False
 default rafaela_asked = False
 default jamie_asked = False
 
+# splash
+image splash = "Group 5.png"
+
+label splashscreen:
+    scene black
+    with Pause(1)
+
+    show splash with dissolve
+    with Pause(2)
+
+    scene black with dissolve
+    with Pause(1)
+
+    return
+
+
 # The game starts here.
 label start:
 
@@ -62,8 +78,7 @@ label start:
     
     show cassie neutral at right
     c "Ayusin niyo yung ilalagay niyo ha, {w}first name then surname muna."
-    
-    "..."
+    c "..."
     "She stared directly at me for some reason."
     
     show cassie angry at right
@@ -1134,7 +1149,7 @@ label start:
     a "What's both of your problems, seriously?"
     
     show kira sarcastic at right
-    k "Gee, I wonder."
+    k "Wala."
     
     hide andrea dismayed with dissolve
     show rafaela neutral at center:
@@ -1187,7 +1202,6 @@ label start:
     
     # CG ILLUSTRATION SCENE HERE
     # TOTAL SILENCE HERE. CUT ALL AMBIENCE
-   
 
     "........"
     "....."
