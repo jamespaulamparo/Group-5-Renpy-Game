@@ -8,7 +8,7 @@
 
 | Status | Version | Last Updated |
 | :--- | :--- | :--- |
-| **In Development** | **v0.0.7 Alpha** | November 30, 2025 |
+| **In Development** | **v0.1.1 Alpha** | December 3, 2025 |
 
 **Current Progress:**
 * Arc 1 (out of [e.g., 3 arcs total]) is fully written.
