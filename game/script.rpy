@@ -9,7 +9,7 @@ define c = Character("Ms. Cassandra", who_color="#9e8677", what_color="#FFFFFF")
 define l = Character("Loraine", who_color="#a298c6", what_color="#FFFFFF")
 define h = Character("Haifa", who_color="#93c386", what_color="#FFFFFF")
 
-# add dan, choco for sub haraters
+# add dan(?), choco(?) for sub haraters
 # Example: define dan = Character("Dan", color="#...")
 # Example: define choco = Character("Choco", color="#...")
 
