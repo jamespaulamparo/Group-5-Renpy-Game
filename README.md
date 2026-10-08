@@ -1,8 +1,8 @@
-# 💖 Group 5: A Ren'Py Visual Novel
+# Group 5: A Ren'Py Visual Novel
 
 ## ✨ Project Summary
 
-> A personal dating simulator / visual novel project created to experiment with game development, narrative structure, and the use of multimedia to tell a story. This repository serves as a live backup and portfolio piece demonstrating proficiency in Git workflow.
+> A visual novel project created to experiment with game development, narrative structure, and the use of multimedia to tell a story. This repository serves as a live backup and portfolio piece demonstrating proficiency in Git workflow.
 
 ## 🚀 Status & Roadmap
 
